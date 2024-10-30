@@ -90,44 +90,49 @@ print("*"*75)
 # Print the result of the equation
 # Again, loop through prompting the user for input until `exit` in any casing is input 
 
-calc_user = input("Please input in the form of 'operand operator operand': ")
-calc_user = calc_user.replace(" ","")
+while True:
+    calc_user = input("Enter an expression or type 'exit'") 
+    if calc_user.lower() == 'exit':
+        break
+    # calc_user = input("Please input in the form of 'operand operator operand': ")
+    calc_user = calc_user.replace(" ","")
 
-calculator = "+-*/%"
-calculator2 = None
-calculator_pos = 0
+    calculator = "+-*/%"
+    calculator2 = None
+    calculator_pos = 0
 
-for num in calculator:
-    if num in calc_user:
-        op = calc_user.split(num)
-        if len(op) == 2:
-            integer1, integer2, = op
-            calculator = num
-            break
+    for num in calculator:
+        if num in calc_user:
+            op = calc_user.split(num)
+            if len(op) == 2:
+                integer1, integer2, = op
+                calculator = num
+                break
+    else:
+        print("Statement is wrong")
+        continue
 
-if calculator and integer1 and integer2: 
-    integer1, integer2 = calc_user.split(calculator)
-    try:
-        integer1 = float(integer1)
-        integer2 = float(integer2)
-
-        if calculator == "+":
-            output = integer1 + integer2
-        elif calculator == "-":
-            output = integer1 - integer2
-        elif calculator == "*":
-            output = integer1 * integer2
-        elif calculator == "/":
-            output = integer1 / integer2 if integer2 != 0 else "No zero in denominator"
-        elif calculator == "%": 
-            output = integer1 % integer2 if integer2 != 0 else "No zero in denominator"
-        else: 
-            output = "Invalid operation"
-    except ValueError: 
-        output = "Please enter valid integers"
-else: 
-    output = "No operation found!"
-print("Output:",output)
-
-    
+    if calculator and integer1 and integer2: 
+        integer1, integer2 = calc_user.split(calculator)
+        try:
+            integer1 = float(integer1)
+            integer2 = float(integer2)
+                
+            if calculator == "+":
+                    output = integer1 + integer2
+            elif calculator == "-":
+                output = integer1 - integer2
+            elif calculator == "*":
+                output = integer1 * integer2
+            elif calculator == "/":
+                output = integer1 / integer2 if integer2 != 0 else "No zero in denominator"
+            elif calculator == "%": 
+                output = integer1 % integer2 if integer2 != 0 else "No zero in denominator"
+            else: 
+                output = "Invalid operation"
+        except ValueError: 
+            output = "Please enter valid integers"
+    else: 
+        output = "No operation found!"
+    print("Output",output)
 
