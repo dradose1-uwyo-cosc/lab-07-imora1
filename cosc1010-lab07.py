@@ -1,7 +1,7 @@
-# Your Name Here
+# Isabell Mora
 # UWYO COSC 1010
-# Submission Date
-# Lab XX
+# 10-28-24
+# Lab 07
 # Lab Section: 
 # Sources, people worked with, help given to: 
 # your
@@ -16,10 +16,23 @@
     # To do so you can use the methods `.isdigit()` or `.isnumeric()`
     # If a user did not enter a number output a statement saying so
 # You will continue to prompt the user until a proper integer value is entered
+result = 1
+con = 1
+while con:
+    upper_bound_user = input("Enter non-negative integer: ")
+    if upper_bound_user.isdigit():
+        u_bound = int(upper_bound_user)
+        if u_bound == 0 or u_bound == 1:
+            result = 1
+        for value in range(2, u_bound + 1):
+            result *= value
 
-factorial = 1
+    
+        print(result)
+        con = 0
+    else:
+        print("Please enter valid integer")
 
-print(f"The result of the factorial based on the given bound is {factorial}")
 
 print("*"*75)
 # Create a while loop that prompts a user for input of an integer values
@@ -36,8 +49,26 @@ print("*"*75)
     # I recommend checking out: https://www.w3schools.com/python/ref_string_replace.asp to figure out how one may remove a character from a string
 # All this together means you will have an intensive while loop that includes multiple if statements, likely with some nesting 
 # The sum should start at 0 
-
 num_sum = 0 
+n_sum = 1
+while n_sum:
+    sum_1 = input("Please enter any number of integers or exit to stop: ")
+    sum_1 = sum_1.lower()
+    if sum_1 == "exit":
+        n_sum = 0 
+    if sum_1[0] == "-":
+        sum_1 = sum_1.replace("-","")
+        
+        if sum_1.isdigit():
+            num_sum -= int(sum_1)
+        else:
+            print("Please enter valid integer")
+    elif sum_1.isdigit():
+            num_sum += int(sum_1)
+    else:
+        print("Please enter valid integer")
+
+
 
 print(f"Your final sum is {num_sum}")
 
@@ -59,4 +90,44 @@ print("*"*75)
 # Print the result of the equation
 # Again, loop through prompting the user for input until `exit` in any casing is input 
 
-        
+calc_user = input("Please input in the form of 'operand operator operand': ")
+calc_user = calc_user.replace(" ","")
+
+calculator = "+-*/%"
+calculator2 = None
+calculator_pos = 0
+
+for num in calculator:
+    if num in calc_user:
+        op = calc_user.split(num)
+        if len(op) == 2:
+            integer1, integer2, = op
+            calculator = num
+            break
+
+if calculator and integer1 and integer2: 
+    integer1, integer2 = calc_user.split(calculator)
+    try:
+        integer1 = float(integer1)
+        integer2 = float(integer2)
+
+        if calculator == "+":
+            output = integer1 + integer2
+        elif calculator == "-":
+            output = integer1 - integer2
+        elif calculator == "*":
+            output = integer1 * integer2
+        elif calculator == "/":
+            output = integer1 / integer2 if integer2 != 0 else "No zero in denominator"
+        elif calculator == "%": 
+            output = integer1 % integer2 if integer2 != 0 else "No zero in denominator"
+        else: 
+            output = "Invalid operation"
+    except ValueError: 
+        output = "Please enter valid integers"
+else: 
+    output = "No operation found!"
+print("Output:",output)
+
+    
+
